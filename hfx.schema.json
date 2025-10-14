@@ -240,5 +240,19 @@
   "required": [
     "metaData"
   ],
+  "allOf": [
+    {
+      "if": {
+        "not": { "required": ["frequencyData"] }
+      },
+      "then": {
+        "properties": {
+          "metaData": {
+            "required": ["frequencyLocation"]
+          }
+        }
+      }
+    }
+  ],
   "additionalProperties": false
 }

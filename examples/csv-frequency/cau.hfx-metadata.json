@@ -1,1 +1,69 @@
-data here
+Preview & Export
+Validate visually and download as JSON
+
+{
+  "metadata": {
+    "outputResolution": [
+      {
+        "locus": "A",
+        "resolution": "g"
+      },
+      {
+        "locus": "B",
+        "resolution": "g"
+      },
+      {
+        "locus": "C",
+        "resolution": "g"
+      },
+      {
+        "locus": "DRB1",
+        "resolution": "g"
+      },
+      {
+        "locus": "DQB1",
+        "resolution": "g"
+      }
+    ],
+    "hfeMethod": {
+      "method": "EM",
+      "parameters": [
+        {
+          "parameter": "iterations",
+          "value": "100"
+        }
+      ]
+    },
+    "cohortDescription": {
+      "species": "Homo sapiens",
+      "population": [
+        {
+          "name": "CAU",
+          "geoLocation": {
+            "ISO3166": "US",
+            "subdivision": []
+          },
+          "populationSize": 1000
+        }
+      ],
+      "cohortSize": 1000,
+      "dataSource": "Registry"
+    },
+    "nomenclatureUsed": {
+      "database": "IPD-IMGT/HLA",
+      "group": "",
+      "version": "3.20.0"
+    },
+    "producer": {
+      "name": "Martin Maiers",
+      "organisation": "NMDP",
+      "email": "mmaiers@nmdp.org",
+      "publication": {
+        "doi": "10.1016/j.humimm.2007.04.005",
+        "year": "2007"
+      }
+    },
+    "frequencyLocation": "file://cau.csv",
+    "checkSum": "8e7bb58cff1a32c250898c13f2c354f4"
+  }
+}

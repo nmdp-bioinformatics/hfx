@@ -27,16 +27,19 @@
           "$ref": "#/$defs/hfeMethod"
         },
         "cohortDescription": {
-          "$ref": "#/$defs/cohortDescription"
+          "$ref": "#/$defs/cohort"
         },
         "nomenclatureUsed": {
-          "$ref": "#/$defs/nomenclatureUsed"
+          "$ref": "#/$defs/nomenclature"
         },
         "producer": {
           "$ref": "#/$defs/producer"
         },
         "frequencyLocation": {
           "$ref": "#/$defs/frequencyDataLocation"
+        },
+        "license": {
+          "$ref": "#/$defs/license"
         },
         "checkSum": {
           "type": "string",
@@ -84,13 +87,13 @@
               "Serology"
             ],
             "description": "set of resolutions for a given locus in frequencies"
-          },
-          "required": [
-            "locus",
-            "resolution"
-          ],
-          "additionalProperties": false
-        }
+          }
+        },
+        "required": [
+          "locus",
+          "resolution"
+        ],
+        "additionalProperties": false
       },
       "minItems": 1,
       "uniqueItems": false
@@ -167,72 +170,71 @@
           "description": "Population Details",
           "items": {
             "type": "object",
-      
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Short population name/code"
-            },
-            "geoLocation": {
-              "type": "object",
-              "properties": {
-                "ISO3166" : {
-                  "type": "string",
-                  "description": "https://en.wikipedia.org/wiki/ISO_3166-2 and 3166-1"
-                },
-                "subdivision" : {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "type": "string",
-                      "description": "Name of State/Province"
-                    }
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Short population name/code"
+              },
+              "geoLocation": {
+                "type": "object",
+                "properties": {
+                  "ISO3166": {
+                    "type": "string",
+                    "description": "https://en.wikipedia.org/wiki/ISO_3166-2 and 3166-1"
                   },
-                  "description": "Subdivision of or collection of subdivision of ISO_3166-1/2"
-                },
-                "latitude": {
-                  "type": "string",
-                  "description": "latitude degrees 2 left of decimal ISO 6709"
-                },
-                "longitude": {
-                  "type": "string",
-                  "description": "longitude degrees 3 less than decimal ISO 6709"
+                  "subdivision": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Name of State/Province"
+                        }
+                      }
+                    },
+                    "description": "Subdivision of or collection of subdivision of ISO_3166-1/2"
+                  },
+                  "latitude": {
+                    "type": "string",
+                    "description": "latitude degrees 2 left of decimal ISO 6709"
+                  },
+                  "longitude": {
+                    "type": "string",
+                    "description": "longitude degrees 3 less than decimal ISO 6709"
+                  }
                 },
                 "required": [
                   "ISO3166"
                 ]
+              },
+              "ethnicity": {
+                "type": "string",
+                "description": "Optional ancestry label"
+              },
+              "populationDescription": {
+                "type": "string",
+                "description": "Description of the cohort population"
+              },
+              "populationSize": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "description": "Size of this population in the sample"
+              },
+              "language": {
+                "type": "string",
+                "description": "spoken language of the population, https://www.ethnologue.com/codes/"
+              },
+              "religion": {
+                "type": "string",
+                "description": "Religion of population"
               }
             },
-            "ethnicity": {
-              "type": "string",
-              "description": "Optional ancestry label"
-            },
-            "populationDescription": {
-              "type": "string",
-              "description": "Description of the cohort population"
-            },
-            "populationSize": {
-              "type": "integer",
-              "exclusiveMinimum": 0,
-              "description": "Size of this population in the sample"
-            },
-            "language": {
-              "type": "string",
-              "description": "spoken language of the population, https://www.ethnologue.com/codes/"
-            },
-            "religion": {
-              "type": "string",
-              "description": "Religion of population"
-            }
-            },
-
-          "required": [
-            "name",
-            "geoLocation"
-          ],
-          "additionalProperties": true
-          }
+            "required": [
+              "name",
+              "geoLocation"
+            ],
+            "additionalProperties": true
           }
         },
         "cohortSize": {
@@ -306,13 +308,17 @@
               "description": "DOI of the publication"
             },
             "year": {
-              "type": "date",
+              "type": "string",
               "description": "Date of publication"
             }
           }
         }
       },
-      "required": ["name", "organisation", "email"],
+      "required": [
+        "name",
+        "organisation",
+        "email"
+      ],
       "additionalProperties": false
     },
     "frequencyData": {
@@ -341,7 +347,8 @@
       "oneOf": [
         {
           "type": "string",
-          "format": "uri"
+          "format": "uri",
+          "description": "URI can be http:// or file://data.csv"
         },
         {
           "type": "string",
@@ -351,5 +358,23 @@
         }
       ],
       "description": "Frequency is either inlined or available at the given URI"
+    },
+    "license": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name"
+        },
+        "identifier": {
+          "type": "string",
+          "description": "SPDX identifier https://spdx.org/licenses/"
+        },
+        "licenseDescription": {
+          "type": "string",
+          "description": "Description of the license, if different from SPDX"
+        }
+      }
     }
   }
+}

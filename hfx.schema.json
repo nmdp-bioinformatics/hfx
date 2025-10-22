@@ -270,7 +270,7 @@
         },
         "group": {
           "type": "string",
-          "description": "Groups such as NHP, DLA, FISH etc.."
+          "description": "Groups identified on the https://www.ebi.ac.uk/ipd/mhc/ and https://www.ebi.ac.uk/ipd/nhkir/ web pages."
         },
         "version": {
           "type": "string",

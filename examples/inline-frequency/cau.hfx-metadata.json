@@ -48,7 +48,6 @@
     },
     "nomenclatureUsed": {
       "database": "IPD-IMGT/HLA",
-      "group": "",
       "version": "3.20.0"
     },
     "producer": {
@@ -60,7 +59,7 @@
         "year": "2007"
       }
     },
-    "frequencyLocation": "inline"
+    "frequencyDataLocation": "inline"
   },
   "frequencyData": [
     {

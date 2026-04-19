@@ -1,3 +1,62 @@
+# HFX JSON Schema (Markdown)
+
+This document is a human-friendly Markdown version of the `hfx.schema.json` JSON Schema used to validate HFX (Haplotype Frequency eXchange) submission documents.
+
+## Overview
+
+An HFX document is a JSON object with two top-level properties:
+
+- `metadata` (required): an object describing provenance and structure of the frequency data.
+- `frequencyData` (optional): an array of frequency records when the data is inlined.
+
+See the full embedded schema below for exact constraints.
+
+---
+
+## Top-level properties
+
+- `metadata` (object, required)
+  - `creationDateTime` (string, date-time)
+  - `outputResolution` (array): list of locus/resolution objects. Items reference either HLA or KIR resolution definitions.
+  - `hfeMethod` (object): HFE method with `method` (string) and `parameters` (array of `{parameter, value}` objects).
+  - `cohortDescription` (object): cohort metadata including `species`, `population` (array), `cohortSize` (number), and `dataSource`.
+  - `nomenclatureUsed` (object): `database` and `version`.
+  - `producer` (object): `name`, `organisation`, `email`, optional `publication`.
+  - `frequencyLocation` (string): either a URI (e.g., `file://` or `http://`) or the literal `inline`.
+  - `frequencyFileHeader` (object, optional): mapping of expected CSV field names to actual header strings.
+  - `license` (object)
+  - `checkSum` (string): MD5 checksum (32 hex chars).
+
+- `frequencyData` (array, optional): inlined frequency records. Each item has:
+  - `haplotype` (string): GL String
+  - `frequency` (number)
+
+## Important definitions (summary)
+
+- `hlaResolution` — array of `{locus: string, resolution: string}` where `resolution` enum includes `g`, `G`, `P`, `allele-family`, `protein-sequence`, `coding-sequence`, `genomic-sequence`, `Serology`.
+- `kirResolution` — array of `{locus, resolution}` with sequence-level resolution enum.
+- `hfeMethod` — object with `method` and `parameters` (array of `{parameter, value}` strings).
+- `cohort` — object describing the cohort. `population` is an array of objects each containing `name`, `geoLocation` (must include `ISO3166`, may include `subdivision`, `latitude`, `longitude`), optional `populationSize` (number), `ethnicity`, `populationDescription`, `language`, `religion`.
+- `nomenclature` — `database` enum (IPD groups) and `version`.
+- `producer` — required `name`, `organisation`, `email`, optional `publication` (`doi`, `year`).
+- `frequencyData` — array of `{haplotype: string, frequency: number}`.
+- `frequencyDataLocation` — either a `uri` string or the literal `inline`.
+- `license` — object with `name`, `identifier`, `licenseDescription`.
+- `frequencyFileHeader` — object mapping expected field names (e.g., `haplotype`, `frequency`, `count`) to the actual column header strings in CSV files.
+
+## Example `frequencyFileHeader`
+
+```json
+{
+  "haplotype": "Haplo",
+  "frequency": "Freq",
+  "count": "Count"
+}
+```
+
+## Full JSON Schema
+
+```json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://phycus.org/hfx.schema.json",
@@ -286,14 +345,6 @@
       ],
       "additionalProperties": false
     },
-    "frequencyFileHeader": {
-      "description": "Optional mapping of frequency CSV header names to expected field names",
-      "type": "object",
-      "minProperties": 1,
-      "additionalProperties": {
-        "type": "string"
-      }
-    },
     "producer": {
       "type": "object",
       "description": "Individual or Organization submitting the frequency data",
@@ -386,6 +437,16 @@
           "description": "Description of the license, if different from SPDX"
         }
       }
+    },
+    "frequencyFileHeader": {
+      "description": "Optional mapping of frequency CSV header names to expected field names",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string"
+      }
     }
   }
 }
+```
+

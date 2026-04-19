@@ -53,6 +53,11 @@
           "type": "string",
           "pattern": "^[a-fA-F0-9]{32}$",
           "description": "MD5 checksum represented as a 32-character hexadecimal string."
+        },
+        "hfxID": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI can be http:// or file://data.csv"
         }
       },
       "required": [

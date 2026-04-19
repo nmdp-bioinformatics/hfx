@@ -8,7 +8,7 @@
     "version": {
       "type": "string",
       "description": "Version of the HFX schema",
-      "const": "0.1.0"
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
     },
     "metadata": {
       "description": "metadata corresponding to frequency file",

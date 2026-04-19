@@ -450,12 +450,3 @@ See the full embedded schema below for exact constraints.
 }
 ```
 
----
-
-If you'd like, I can:
-
-- produce a separate `docs/` file per schema section,
-- auto-generate HTML docs from this schema, or
-- inline the schema in `README.md` instead.
-
-Tell me which format you prefer and I'll continue.
